@@ -88,37 +88,39 @@ export default class Chat extends React.PureComponent<ChatProps> {
         <div className="chat-history" ref={this.chatHistoryRef}>
 
           {messages.length ? (
-            messages.map((message, i) => (
-              <div key={i}>
-                {message.userId === ME ? (
-                  <div className="chat-item chat-item-me">
-                    <div className="message">
-                      <span className="message-user-name">
-                      {message.nickname}
-                      </span>
-                      <time className="message-time">{message.timestamp}</time>
-                      <MessageEntry message={message} />
-                    </div>
-                    <span className="chat-item-img">
-                      <MdFace />
-                    </span>
-                  </div>
-                ) : (
-                  <div className="chat-item chat-item-other">
-                    <span className="chat-item-img">
-                      <MdFace />
-                    </span>
-                    <div className="message">
-                      <span className="message-user-name">
+            messages
+              .filter((message) => (message.userId !== "[PeerCalls]"))
+              .map((message, i) => (
+                <div key={i}>
+                  {message.userId === ME ? (
+                    <div className="chat-item chat-item-me">
+                      <div className="message">
+                        <span className="message-user-name">
                         {message.nickname}
+                        </span>
+                        <time className="message-time">{message.timestamp}</time>
+                        <MessageEntry message={message} />
+                      </div>
+                      <span className="chat-item-img">
+                        <MdFace />
                       </span>
-                      <time className="message-time">{message.timestamp}</time>
-                      <MessageEntry message={message} />
                     </div>
-                  </div>
-                )}
-              </div>
-            ))
+                  ) : (
+                    <div className="chat-item chat-item-other">
+                      <span className="chat-item-img">
+                        <MdFace />
+                      </span>
+                      <div className="message">
+                        <span className="message-user-name">
+                          {message.nickname}
+                        </span>
+                        <time className="message-time">{message.timestamp}</time>
+                        <MessageEntry message={message} />
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))
           ) : (
             <div className="chat-empty">
               <span className="chat-empty-icon">
