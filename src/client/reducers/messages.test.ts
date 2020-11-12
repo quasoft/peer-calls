@@ -10,11 +10,13 @@ describe('reducers/messages', () => {
       const payload: MessageType = {
         type: 'text',
         userId: 'test',
+        nickname: 'test',
         payload: 'hello',
         timestamp: new Date().toISOString(),
       }
       const expected: Message = {
         message: 'hello',
+        nickname: 'test',
         userId: 'test',
         timestamp: new Date(payload.timestamp).toLocaleString(),
       }

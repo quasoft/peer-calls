@@ -1,9 +1,11 @@
 import * as constants from '../constants'
 import { MessageAddAction, MessageSendAction } from '../actions/ChatActions'
 import { NotificationAddAction } from '../actions/NotifyActions'
+import nicknames from './nicknames'
 
 export interface Message {
   userId: string
+  nickname: string
   message: string
   timestamp: string
   data?: string
@@ -25,6 +27,7 @@ const defaultState: MessagesState = {
 function convertNotificationToMessage(action: NotificationAddAction): Message {
   return {
     userId: '[PeerCalls]',
+    nickname: '[PeerCalls]',
     message: action.payload.message,
     system: true,
     timestamp: new Date().toLocaleString(),
@@ -50,6 +53,7 @@ function handleMessage(
           data: payload.payload.data,
           image: imageRegexp.test(payload.payload.data),
           userId: payload.userId,
+          nickname: payload.nickname,
           message: payload.payload.name,
           timestamp: new Date(payload.timestamp).toLocaleString(),
         }],
@@ -60,6 +64,7 @@ function handleMessage(
         count,
         list: [...state.list, {
           userId: payload.userId,
+          nickname: payload.nickname,
           message: payload.payload,
           timestamp: new Date(payload.timestamp).toLocaleString(),
         }],

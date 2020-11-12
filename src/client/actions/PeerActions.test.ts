@@ -99,6 +99,7 @@ describe('PeerActions', () => {
         const message: MessageType = {
           timestamp: new Date().toISOString(),
           userId: 'test-user',
+          nickname: 'test-user',
           type: 'text',
           payload: 'test',
         }
