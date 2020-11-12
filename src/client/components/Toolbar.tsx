@@ -162,17 +162,13 @@ export default class Toolbar extends React.PureComponent<
     const hasUnread = unreadCount > 0
     const isInCall = this.props.dialState === DIAL_STATE_IN_CALL
 
-    const className = classnames('toolbar', {
-      'toolbar-hidden': this.props.chatVisible || this.state.hidden,
-    })
-
     const encryptionIcon = this.state.encrypted
       ? MdLock
       : MdLockOpen
 
     return (
       <React.Fragment>
-        <div className={'toolbar-other ' + className}>
+        <div className='toolbar-other toolbar'>
           <ToolbarButton
             className='copy-url'
             key='copy-url'
@@ -239,7 +235,7 @@ export default class Toolbar extends React.PureComponent<
         </div>
 
         {isInCall && (
-          <div className={'toolbar-call ' + className}>
+          <div className='toolbar-call toolbar'>
             <ShareDesktopDropdown
               className='stream-desktop'
               icon={MdScreenShare}
